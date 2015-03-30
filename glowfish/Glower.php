@@ -67,16 +67,37 @@ class Glower {
 	 	return $this->_request('feature_select/csv', array(), $attach);
  	}
  	
+ 	public function filter_train($userids = array(), $productids = array(), $ratings = array()){
+ 		$data_set = array('userid': $userids, 'productid': $productids, 'ratings': $ratings);
+	 	$data = compact('data_set');
+	 	return $this->_request('filter_train', $data);
+ 	}
+ 	
+ 	public function filter_train_csv($userids = "", $productids = "", $ratings = ""){
+ 		$data_set = array('userid': $userids, 'productid': $productids, 'ratings': $ratings);
+	 	$attach = compact('data_set');
+	 	return $this->_request('filter_train/csv', array(), $attach);
+ 	}
+ 	
+ 	public function filter_predict($userids = array(), $productids = array(), $ratings = array()){
+ 		$data_set = array('userid': $userids, 'productid': $productids, 'ratings': $ratings);
+	 	$data = compact('data_set');
+	 	return $this->_request('filter_predict', $data);
+ 	}
+ 	
+ 	public function filter_predict_csv($userids = "", $productids = "", $ratings = ""){
+ 		$data_set = array('userid': $userids, 'productid': $productids, 'ratings': $ratings);
+	 	$attach = compact('data_set');
+	 	return $this->_request('filter_predict/csv', array(), $attach);
+ 	}
+ 	
  	private function _request($endpoint, $data = array(), $attachments = null){
  		foreach($this->attributes as $attribute => $value){
 	 		$data[$attribute] = (!is_bool($value) ? $value : ($value ? "true" : "false"));
  		}
- 		
- 		//echo '<pre>';var_dump($attachments);echo '</pre>';
- 	
+ 		 	
 	 	$request = Httpful\Request::post(API_ENDPOINT . API_VERSION . '/' . $endpoint . '/')
 	 		->expectsJson()
-	 		//->sendsJson()
 	 		->authenticateWith($this->_sid, $this->_token)
 	 		->body($data);
 	 		
