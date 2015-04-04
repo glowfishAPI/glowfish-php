@@ -68,25 +68,25 @@ class Glower {
  	}
  	
  	public function filter_train($userids = array(), $productids = array(), $ratings = array()){
- 		$data_set = array('userid': $userids, 'productid': $productids, 'ratings': $ratings);
+ 		$data_set = array('userid': $userids, 'productid': $productids, 'rating': $ratings);
 	 	$data = compact('data_set');
 	 	return $this->_request('filter_train', $data);
  	}
  	
  	public function filter_train_csv($userids = "", $productids = "", $ratings = ""){
- 		$data_set = array('userid': $userids, 'productid': $productids, 'ratings': $ratings);
+ 		$data_set = array('userid': $userids, 'productid': $productids, 'rating': $ratings);
 	 	$attach = compact('data_set');
 	 	return $this->_request('filter_train/csv', array(), $attach);
  	}
  	
  	public function filter_predict($userids = array(), $productids = array(), $ratings = array()){
- 		$data_set = array('userid': $userids, 'productid': $productids, 'ratings': $ratings);
+ 		$data_set = array('userid': $userids, 'productid': $productids, 'rating': $ratings);
 	 	$data = compact('data_set');
 	 	return $this->_request('filter_predict', $data);
  	}
  	
  	public function filter_predict_csv($userids = "", $productids = "", $ratings = ""){
- 		$data_set = array('userid': $userids, 'productid': $productids, 'ratings': $ratings);
+ 		$data_set = array('userid': $userids, 'productid': $productids, 'rating': $ratings);
 	 	$attach = compact('data_set');
 	 	return $this->_request('filter_predict/csv', array(), $attach);
  	}
